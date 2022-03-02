@@ -1,6 +1,8 @@
 node_modules
 
 /.cache
-/build
+/server/index.js
 /public/build
-.env
+preferences.arc
+sam.json
+sam.yaml

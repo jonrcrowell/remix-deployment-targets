@@ -2,52 +2,57 @@
 
 - [Remix Docs](https://remix.run/docs)
 
+## Architect Setup
+
+When deploying to AWS Lambda with Architect, you'll need:
+
+- Architect (`arc`) CLI
+- AWS SDK
+
+Architect recommends installing these globally:
+
+```sh
+$ npm i -g @architect/architect aws-sdk
+```
+
 ## Development
 
-From your terminal:
+You will be running two processes during development when using Architect as your server.
+
+- Your Architect server sandbox in one
+- The Remix development server in another
 
 ```sh
-npm run dev
+# in one tab
+$ arc sandbox
+
+# in another
+$ npm run dev
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
+Open up [http://localhost:3333](http://localhost:3333) and you should be ready to go!
 
-## Deployment
+If you'd rather run everything in a single tab, you can look at [concurrently](https://npm.im/concurrently) or similar tools to run both processes in one tab.
 
-First, build your app for production:
+## Deploying
 
-```sh
-npm run build
-```
+Before you can deploy, you'll need to do some setup with AWS:
 
-Then run the app in production mode:
+- First [install the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- Then [follow the Architect setup instructions](https://arc.codes/docs/en/guides/get-started/detailed-aws-setup).
 
-```sh
-npm start
-```
+If you make it through all of that, you're ready to deploy!
 
-Now you'll need to pick a host to deploy it to.
+1. build the app for production:
 
-### DIY
+   ```sh
+   $ npm run build
+   ```
 
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
+2. Deploy with `arc`
 
-Make sure to deploy the output of `remix build`
+   ```sh
+   $ arc deploy production
+   ```
 
-- `build/`
-- `public/build/`
-
-### Using a Template
-
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
-```
+You're in business!
