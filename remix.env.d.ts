@@ -1,2 +1,2 @@
-/// <reference types="@remix-run/dev" />
-/// <reference types="@remix-run/node/globals" />
+/// <reference types="./node_modules/@remix-run/dev/index.d.ts" />
+/// <reference types="./node_modules/@remix-run/deno/globals.d.ts" />
